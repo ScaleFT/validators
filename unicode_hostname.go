@@ -589,6 +589,7 @@ func ZeroWidthNonJoiner(val []rune, idx int) (ok bool) {
 // verifyRFC5891_4_2_3_1 ensures there are no leading, terminating, or double-hypens in the label
 func verifyRFC5891_4_2_3_1(label string) error {
 	var p, q rune
+	var i int
 	runeslice := []rune(label)
 	llen := len(runeslice) - 1
 
@@ -597,9 +598,9 @@ func verifyRFC5891_4_2_3_1(label string) error {
 		return errors.New("leading or trailing hyphen")
 	}
 
-	for _, p = range runeslice {
+	for i, p = range runeslice {
 		if unicode.Is(unicode.Properties["Hyphen"], p) &&
-			unicode.Is(unicode.Properties["Hyphen"], q) {
+			unicode.Is(unicode.Properties["Hyphen"], q) && i==3 {
 			return errors.New("Consecutive hyphens")
 		}
 		q = p
