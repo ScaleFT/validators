@@ -87,7 +87,16 @@ func TestRFC5891DNSNegative(t *testing.T) {
 	err = RFC5891DNS(v)
 	require.Error(t, err)
 
+	// https://tools.ietf.org/html/rfc5891#section-4.2.3
 	v = "no--hyphens.com"
+	err = RFC5891DNS(v)
+	require.Error(t, err)
+
+	v = "v--alidhyphens.com"
+	err = RFC5891DNS(v)
+	require.NoError(t, err)
+
+	v = "val--idhyphens.com"
 	err = RFC5891DNS(v)
 	require.Error(t, err)
 
