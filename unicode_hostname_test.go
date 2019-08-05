@@ -87,9 +87,13 @@ func TestRFC5891DNSNegative(t *testing.T) {
 	err = RFC5891DNS(v)
 	require.Error(t, err)
 
-	v = "double--hyphen.com"
+	v = "no--hyphens.com"
 	err = RFC5891DNS(v)
 	require.Error(t, err)
+
+	v = "allowed--hyphens.com"
+	err = RFC5891DNS(v)
+	require.NoError(t, err)
 
 	v = "contains..nested.null.doma.in"
 	err = RFC5891DNS(v)
