@@ -98,7 +98,7 @@ func TestRFC5891DNSNegative(t *testing.T) {
 
 	v = "val--idhyphens.com"
 	err = RFC5891DNS(v)
-	require.Error(t, err)
+	require.NoError(t, err)
 
 	v = "allowed--hyphens.com"
 	err = RFC5891DNS(v)
