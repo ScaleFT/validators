@@ -1,10 +1,16 @@
 language: go
 
 go:
-  - 1.6
-  - 1.7
-  - 1.8
+  - 1.10.x
+  - 1.11.x
+  - 1.12.x
   - master
 
-install:
- - go get -u github.com/stretchr/testify/require github.com/jonboulle/clockwork github.com/russellhaering/jsonmap golang.org/x/text/unicode/norm golang.org/x/net/idna gopkg.in/dgrijalva/jwt-go.v2 gopkg.in/ldap.v2
+env:
+  - GO111MODULE=on
+
+before_install:
+  - go get -v golang.org/x/lint/golint
+
+script:
+  - go test -cpu=1,2 -v ./...
