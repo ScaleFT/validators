@@ -21,7 +21,7 @@ func TestValidateHostname(t *testing.T) {
 
 	// No attempt to expand user supplied values
 	_, err = v.Validate("%h")
-	require.EqualError(t, err, "validation error: invalid hostname: %h: disallowed value '%'")
+	require.EqualError(t, err, "invalid hostname: %h: disallowed value '%'")
 }
 
 func TestValidatePort(t *testing.T) {
