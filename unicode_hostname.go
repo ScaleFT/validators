@@ -597,6 +597,7 @@ func verifyRFC5891_4_2_3_1(label string) error {
 	}
 
 	// A-labels (ASCII-compatible encoded (ACE) idns) are prefixed with `xn--`, hence this restriction
+	// TODO: This means A-labels will fail validation here.
 	if len(runeslice) >= 4 {
 		if unicode.Is(unicode.Properties["Hyphen"], runeslice[2]) &&
 			unicode.Is(unicode.Properties["Hyphen"], runeslice[3]) {
