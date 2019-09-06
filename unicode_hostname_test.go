@@ -100,6 +100,10 @@ func TestRFC5891DNSNegative(t *testing.T) {
 	err = RFC5891DNS(v)
 	require.Error(t, err)
 
+	v = "xn--28j2a3ar1pp75ovm7c.xn--28j2a3ar1pp75ovm7c.jp"
+	err = RFC5891DNS(v)
+	require.Error(t, err)
+
 	v = "contains..nested.null.doma.in"
 	err = RFC5891DNS(v)
 	require.Error(t, err)
