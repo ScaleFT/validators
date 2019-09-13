@@ -64,6 +64,15 @@ func TestRFC5891DNS(t *testing.T) {
 
 	err = RFC5891DNS("ԛәлп.com")
 	require.NoError(t, err)
+
+	err = RFC5891DNS("double--hyphen.com")
+	require.NoError(t, err)
+
+	err = RFC5891DNS("d--blehyphen.com")
+	require.NoError(t, err)
+
+	err = RFC5891DNS("dou--ehyphen.com")
+	require.NoError(t, err)
 }
 
 func TestRFC5891DNSNegative(t *testing.T) {
@@ -87,7 +96,11 @@ func TestRFC5891DNSNegative(t *testing.T) {
 	err = RFC5891DNS(v)
 	require.Error(t, err)
 
-	v = "double--hyphen.com"
+	v = "do--lehyphen.com"
+	err = RFC5891DNS(v)
+	require.Error(t, err)
+
+	v = "xn--28j2a3ar1pp75ovm7c.xn--28j2a3ar1pp75ovm7c.jp"
 	err = RFC5891DNS(v)
 	require.Error(t, err)
 
