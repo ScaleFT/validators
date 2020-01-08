@@ -152,7 +152,11 @@ var (
 		},
 	}
 
-	// test for isLDH (letter, digit, hyphen)
+	// test for isLDH (letter, digit, hyphen, and underscore)
+	// https://tools.ietf.org/html/rfc5892#section-2.5
+	//
+	// We extended this character class to include underscores, as they are still commonly
+	// found in domain names in the wild, even if invalid in the RFC.
 	ldhpoints = unicode.RangeTable{
 		R16: []unicode.Range16{
 			{
@@ -160,9 +164,15 @@ var (
 				Hi:     0x002D,
 				Stride: 1,
 			},
+
 			{
 				Lo:     0x0030,
 				Hi:     0x0039,
+				Stride: 1,
+			},
+			{
+				Lo:     0x005F,
+				Hi:     0x005F,
 				Stride: 1,
 			},
 			{
@@ -716,10 +726,14 @@ func RFC5891DNS(record string) error {
 	labels := strings.Split(normal, ".")
 
 	for _, r := range normal {
-		if !isLDH(r) && r != '.' {
-			ldhOnly = false
-			break
+		if isLDH(r) {
+			continue
 		}
+		if r == '.' {
+			continue
+		}
+		ldhOnly = false
+		break
 	}
 
 	for _, label := range labels {
