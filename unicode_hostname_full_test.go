@@ -106,8 +106,17 @@ func Test0030_0039(t *testing.T) {
 	ValidateRuneRange(t, 0x0030, 0x0039, pPVALID)
 }
 
-func Test003A_0060(t *testing.T) {
-	ValidateRuneRange(t, 0x003A, 0x0060, pDISALLOWED)
+func Test003A_005E(t *testing.T) {
+	ValidateRuneRange(t, 0x003A, 0x005E, pDISALLOWED)
+}
+
+func Test005F_005F(t *testing.T) {
+	// Exception to add support for underscores in hostnames -- not from a generated test case
+	ValidateRuneRange(t, 0x005F, 0x005F, pPVALID)
+}
+
+func Test0060_0060(t *testing.T) {
+	ValidateRuneRange(t, 0x0060, 0x0060, pDISALLOWED)
 }
 
 func Test0061_007A(t *testing.T) {

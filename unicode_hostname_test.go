@@ -46,6 +46,11 @@ func TestClassifyRuneOtherContext(t *testing.T) {
 	CompareDirect(rune(0x05F3), pCONTEXTO, t)
 }
 
+func TestUnderscore(t *testing.T) {
+	err := RFC5891DNS("_foo.google.com")
+	require.NoError(t, err)
+}
+
 func TestRFC5891DNS(t *testing.T) {
 	err := RFC5891DNS("www.google.com")
 	require.NoError(t, err)
